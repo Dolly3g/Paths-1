@@ -1,0 +1,28 @@
+#!/bin/sh
+clear
+echo 'cleaning..'
+sh rmjv_class
+echo "compiling..."
+echo "____________________________________________________________________"
+
+javac -cp junit-4.10.jar *.java
+if [ $? != 0 ]
+	then exit
+fi
+# clear
+
+_java=".java"
+test_java=$1
+test=${test_java:0:${#test_java}-${#_java}} # substring
+
+echo "running tests.."
+echo "____________________________________________________________________"
+java -cp ".;junit-4.10.jar" org.junit.runner.JUnitCore ${test}
+ecode=$?
+echo "exit code of $1 is [$ecode]"
+echo "____________________________________________________________________"
+if [ $ecode != 0 ]
+	then exit
+fi
+sh rmjv_class
+git status
