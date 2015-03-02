@@ -92,4 +92,25 @@ public class PathsTest {
 		assertEquals(true,paths.hasCity("Bangalore"));
 		assertEquals(true,paths.hasCity("Seoul"));
 	}
+	@Test
+	public void result_toString_gives_the_message_true_when_the_path_is_found(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		Result searchResult=paths.search("Bangalore","Seoul");
+		assertEquals("true",searchResult.toString());
+	}
+	@Test
+	public void result_toString_gives_the_message_false_when_the_path_is_not_found(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		Result searchResult=paths.search("Seoul","Bangalore");
+		assertEquals("false",searchResult.toString());
+	}
+	@Test
+	public void result_toString_gives_the_message_not_found_in_db_when_the_city_is_not_found_in_db(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		Result searchResult=paths.search("Seoul","Chennai");
+		assertEquals("No city named \"Chennai\" in database",searchResult.toString());
+	}
 }

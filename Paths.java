@@ -43,11 +43,17 @@ class Paths {
 		paths.addPath("Singapore","Dubai");
 		paths.addPath("Seoul","Beijing");
 		paths.addPath("Beijing","Tokyo");
-		Boolean availability=paths.hasPath(args[0],args[1]);
-		System.out.println(availability.toString());
+		Result result=paths.search(args[0],args[1]);
+		System.out.println(result.toString());
 	}
 }
 class Result {
 	public boolean isAvailable;
 	public String notFound;
+	@Override
+	public String toString(){
+		if(notFound!=null) return "No city named \""+notFound+"\" in database";
+		if(isAvailable) return "true";
+		else return "false";
+	}
 }
