@@ -19,7 +19,7 @@ public class PathTest {
 		assertEquals(true,path1.equals(path2));
 	}
 	@Test
-	public void equals_compares_appropriately_for_cities_which_are_new_Strings(){
+	public void equals_compares_appropriately_when_cities_are_different_Strings_instances(){
 		Path path1=new Path(new String("Bangalore"),new String("Singapore"));
 		Path path2=new Path(new String("Bangalore"),new String("Singapore"));
 		assertEquals(true,path1.equals(path2));
