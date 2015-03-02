@@ -8,6 +8,6 @@ class Path {
 	@Override
 	public boolean equals(Object p){
 		Path path = (Path)p;
-		return (this.to==path.to)&&(this.from==path.from);
+		return path.to.equals(to)&&path.from.equals(from);
 	}
 }
