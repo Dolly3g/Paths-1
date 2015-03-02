@@ -18,7 +18,8 @@ class Paths {
 	public void addPath(String source, String destination){
 		if(source==null || destination==null) return ;
 		Set<String> allPaths=new HashSet<String>();
-		if(hasCity(source)) allPaths=pathsMap.get(source);
+		if(pathsMap.containsKey(source))
+			allPaths=pathsMap.get(source);
 		allPaths.add(new String(destination));
 		pathsMap.put(source,allPaths);
 		allCities.add(source);

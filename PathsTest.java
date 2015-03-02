@@ -112,6 +112,14 @@ public class PathsTest {
 		assertEquals(false,paths.hasCity(null));
 	}
 	@Test
+	public void addPath_does_not_affect_previous_entries_on_new_entries(){
+		setUp();
+		paths.addPath("Chennai","Bangalore");
+		paths.addPath("Bangalore","Pune");
+		assertEquals(true,paths.hasPath("Chennai","Bangalore"));
+		assertEquals(true,paths.hasPath("Bangalore","Pune"));
+	}
+	@Test
 	public void result_contains_isAvailable_true_when_there_is_some_way_to_connect_2_cities(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
@@ -131,6 +139,15 @@ public class PathsTest {
 		paths.addPath("Seoul","Bangalore");
 		paths.addPath("Singapore","Seoul");
 		Result searchResult=paths.search("Singapore","Bangalore");
+		assertEquals(true,searchResult.isAvailable);
+	}
+	@Test
+	public void result_contains_isAvailable_true_when_there_is_some_way_to_connect_4_cities(){
+		setUp();
+		paths.addPath("Chennai","Bangalore");
+		paths.addPath("Bangalore","Pune");
+		paths.addPath("Pune","Lucknow");
+		Result searchResult=paths.search("Chennai","Lucknow");
 		assertEquals(true,searchResult.isAvailable);
 	}
 }
