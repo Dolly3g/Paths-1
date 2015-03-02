@@ -25,7 +25,8 @@ class Paths {
 		return availablePaths.get(index);
 	}
 	public boolean hasPath(String from, String to){
-		return availablePaths.contains(new Path(from,to));
+		return availablePaths.contains(new Path(from,to)) || 
+				availablePaths.contains(new Path(to,from));
 	}
 	public Result search(String from, String to){
 		Result result=new Result();

@@ -36,6 +36,13 @@ public class PathsTest {
 		assertEquals(false,paths.hasPath("Bangalore","Singapore"));
 	}
 	@Test
+	public void hasPath_gives_true_when_the_path_is_available_UP_or_DOWN(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		assertEquals(true,paths.hasPath("Bangalore","Seoul"));
+		assertEquals(true,paths.hasPath("Seoul","Bangalore"));
+	}
+	@Test
 	public void hasCity_gives_true_when_the_given_city_exists(){
 		setUp();
 		paths.addCity("Bangalore");
@@ -111,7 +118,8 @@ public class PathsTest {
 	public void result_toString_gives_the_message_false_when_the_path_is_not_found(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
-		Result searchResult=paths.search("Seoul","Bangalore");
+		paths.addPath("Singapore","Seoul");
+		Result searchResult=paths.search("Singapore","Bangalore");
 		assertEquals("false",searchResult.toString());
 	}
 	@Test
