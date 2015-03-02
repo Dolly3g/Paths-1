@@ -26,12 +26,13 @@ public class PathsTest {
 	public void hasPath_gives_true_String_when_the_path_exists_between_two_given_cities(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
-		assertEquals("true",paths.hasPath("Bangalore","Seoul"));
+		assertEquals(true,paths.hasPath("Bangalore","Seoul"));
 	}
 	@Test
 	public void hasPath_gives_false_String_when_the_path_does_not_exist(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
-		assertEquals("false",paths.hasPath("Bangalore","Singapore"));
+		paths.addPath("Seoul","Singapore");
+		assertEquals(false,paths.hasPath("Bangalore","Singapore"));
 	}
 }
