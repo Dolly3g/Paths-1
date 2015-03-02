@@ -1,40 +1,46 @@
 import java.util.List;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.ArrayList;
 
 class Paths {
-	public List<Path> availablePaths;
-	public Set<String> cities;
+	public Map<String,Set<String>> pathsMap;
+	public Set<String> allCities;
 	public Paths(){
-		availablePaths=new ArrayList<Path>();
-		cities=new HashSet<String>();
-	}
-	public void addCity(String city){
-		cities.add(city);
+		pathsMap=new HashMap<String,Set<String>>();
+		allCities=new HashSet<String>();
 	}
 	public boolean hasCity(String city){
-		return cities.contains(city);
+		return allCities.contains(city);
 	}
-	public void addPath(String from, String to){
-		availablePaths.add(new Path(from,to));
-		cities.add(from);
-		cities.add(to);
+	public void addPath(String source, String destination){
+		if(source==null || destination==null) return ;
+		Set<String> allPaths=new HashSet<String>();
+		if(hasCity(source)) allPaths=pathsMap.get(source);
+		allPaths.add(new String(destination));
+		pathsMap.put(source,allPaths);
+		allCities.add(source);
+		allCities.add(destination);
 	}
-	public Path getPath(int index){
-		return availablePaths.get(index);
+	public boolean hasPath(String source,String destination){
+		if(!pathsMap.containsKey(source)) return false;
+		Set<String> destinations=pathsMap.get(source);
+		return destinations.contains(destination);
 	}
-	public boolean hasPath(String from, String to){
-		return availablePaths.contains(new Path(from,to));
+	public boolean hasAnyPath(String source, String destination){
+		return hasPath(source,destination) || hasPath(destination,source);
 	}
-	public boolean hasAnyPath(String from, String to){
-		return hasPath(from,to) || hasPath(to,from);
-	}
-	public Result search(String from, String to){
+	public Result search(String source, String destination){
 		Result result=new Result();
-		result.notFound=hasCity(from)?hasCity(to)?null:to:from;
-		result.isAvailable=hasPath(from,to);
+		result.notFound=hasCity(source)?hasCity(destination)?null:destination:source;
+		result.isAvailable=hasPath(source,destination);
+		result.entirePath=findPath(source,destination);
 		return result;
+	}
+	public String[] findPath(String source, String destination){
+		return null;
 	}
 	public static void main(String[] args) {
 		Paths paths=new Paths();

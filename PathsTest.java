@@ -10,17 +10,7 @@ public class PathsTest {
 	public void addPath_creates_the_path_for_the_given_cities_and_adds(){
 		setUp();
 		paths.addPath("Bangalore","Singapore");
-		Path path1=paths.getPath(0);
-		Path path2=new Path("Bangalore","Singapore");
-		assertEquals(true,path1.equals(path2));
-	}
-	@Test
-	public void getPath_gives_the_path_at_the_given_index(){
-		setUp();
-		paths.addPath("Bangalore","Seoul");
-		Path path1=paths.getPath(0);
-		Path path2=new Path("Bangalore","Seoul");
-		assertEquals(true,path1.equals(path2));
+		assertEquals(true,paths.hasPath("Bangalore","Singapore"));
 	}
 	@Test
 	public void hasPath_gives_true_when_the_path_exists_between_two_given_cities(){
@@ -32,7 +22,7 @@ public class PathsTest {
 	public void hasPath_gives_false_when_the_path_does_not_exist(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
-		paths.addPath("Seoul","Singapore");
+		paths.addPath("SriLanka","Singapore");
 		assertEquals(false,paths.hasPath("Bangalore","Singapore"));
 	}
 	@Test
@@ -52,20 +42,13 @@ public class PathsTest {
 	@Test
 	public void hasCity_gives_true_when_the_given_city_exists(){
 		setUp();
-		paths.addCity("Bangalore");
+		paths.addPath("Bangalore","Seoul");
 		assertEquals(true,paths.hasCity("Bangalore"));
 	}
 	@Test
 	public void hasCity_gives_false_when_the_given_city_does_not_exists(){
 		setUp();
-		paths.addCity("Bangalore");
-		assertEquals(false,paths.hasCity("Seoul"));
-	}
-	@Test
-	public void addCity_adds_the_given_city_to_the_database(){
-		setUp();
-		paths.addCity("Bangalore");
-		assertEquals(true,paths.hasCity("Bangalore"));
+		assertEquals(false,paths.hasCity("Bangalore"));
 	}
 	@Test
 	public void search_returns_a_result_with_availability_true_for_existing_path(){
@@ -115,28 +98,25 @@ public class PathsTest {
 		assertEquals(true,paths.hasCity("Seoul"));
 	}
 	@Test
-	public void result_entirePath_contains_the_cities_on_the_path_found_2_cities(){
+	public void addPath_does_not_add_when_the_from_place_is_null(){
+		setUp();
+		paths.addPath(null,"Bangalore");
+		assertEquals(false,paths.hasCity(null));
+		assertEquals(false,paths.hasCity("Bangalore"));
+	}
+	@Test
+	public void addPath_does_not_add_when_the_to_place_is_null(){
+		setUp();
+		paths.addPath("Bangalore",null);
+		assertEquals(false,paths.hasCity("Bangalore"));
+		assertEquals(false,paths.hasCity(null));
+	}
+	@Test
+	public void result_contains_isAvailable_true_when_there_is_some_way_to_connect_2_cities(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
 		Result searchResult=paths.search("Bangalore","Seoul");
-		assertEquals("[Bangalore, Seoul]",searchResult.entirePath);
-	}
-	@Test
-	public void result_entirePath_contains_the_cities_on_the_path_found_3_cities(){
-		setUp();
-		paths.addPath("Seoul","Bangalore");
-		paths.addPath("Singapore","Seoul");
-		Result searchResult=paths.search("Singapore","Bangalore");
-		assertEquals("[Singapore, Seoul, Bangalore]",searchResult.entirePath);
-	}
-	@Test
-	public void result_entirePath_contains_the_cities_on_the_path_found_4_cities(){
-		setUp();
-		paths.addPath("Bangalore","SriLanka");
-		paths.addPath("SriLanka","Seoul");
-		paths.addPath("Seoul","Singapore");
-		Result searchResult=paths.search("Bangalore","Singapore");
-		assertEquals("[Bangalore, SriLanka, Seoul, Singapore]",searchResult.entirePath);
+		assertEquals(true,searchResult.isAvailable);
 	}
 	@Test
 	public void result_toString_gives_the_message_not_found_in_db_when_the_city_is_not_found_in_db(){
