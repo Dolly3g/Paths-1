@@ -29,10 +29,7 @@ class Paths {
 	}
 	public Result search(String from, String to){
 		Result result=new Result();
-		if(!hasCity(from))
-			result.notFound=from;
-		else if(!hasCity(to))
-			result.notFound=to;
+		result.notFound=hasCity(from)?hasCity(to)?null:to:from;
 		result.isAvailable=hasPath(from,to);
 		return result;
 	}
