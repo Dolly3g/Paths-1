@@ -26,8 +26,12 @@ class Paths {
 	}
 	public boolean hasPath(String source,String destination){
 		if(!pathsMap.containsKey(source)) return false;
-		Set<String> destinations=pathsMap.get(source);
-		return destinations.contains(destination);
+		Set<String> middleCities=pathsMap.get(source);
+		if(middleCities.contains(destination)) return true;
+		for (String middleCity: middleCities) {
+			if(hasPath(middleCity,destination)) return true;
+		}
+		return false;
 	}
 	public boolean hasAnyPath(String source, String destination){
 		return hasPath(source,destination) || hasPath(destination,source);

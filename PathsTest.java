@@ -125,4 +125,12 @@ public class PathsTest {
 		Result searchResult=paths.search("Seoul","Chennai");
 		assertEquals("No city named \"Chennai\" in database",searchResult.toString());
 	}
+	@Test
+	public void result_contains_isAvailable_true_when_there_is_some_way_to_connect_3_cities(){
+		setUp();
+		paths.addPath("Seoul","Bangalore");
+		paths.addPath("Singapore","Seoul");
+		Result searchResult=paths.search("Singapore","Bangalore");
+		assertEquals(true,searchResult.isAvailable);
+	}
 }
