@@ -12,4 +12,10 @@ public class PathTest {
 		Path path=new Path("Bangalore","Singapore");
 		assertEquals(false,path.equals(new Path("Singapore","Bangalore")));
 	}
+	@Test
+	public void equals_compares_Path_and_Object_instances(){
+		Path path1=new Path("Bangalore","Singapore");
+		Object path2=(Object) new Path("Bangalore","Singapore");
+		assertEquals(true,path1.equals(path2));
+	}
 }

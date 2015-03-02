@@ -5,7 +5,9 @@ class Path {
 		this.from=from;
 		this.to=to;
 	}
-	public boolean equals(Path path){
-		return this.from==path.from && this.to==path.to;
+	@Override
+	public boolean equals(Object p){
+		Path path = (Path)p;
+		return (this.to==path.to)&&(this.from==path.from);
 	}
 }

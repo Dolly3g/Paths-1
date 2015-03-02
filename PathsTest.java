@@ -22,4 +22,10 @@ public class PathsTest {
 		Path path2=new Path("Bangalore","Seoul");
 		assertEquals(true,path1.equals(path2));
 	}
+	@Test
+	public void hasPath_gives_true_String_when_a_path_exists_between_two_given_cities(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		assertEquals("true",paths.hasPath("Bangalore","Seoul"));
+	}
 }
