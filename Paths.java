@@ -1,21 +1,20 @@
-import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 class Paths {
-	public Map<String,List<String>> flightsMap;
+	public List<Path> availablePaths;
 	public Paths(){
-		flightsMap=new HashMap<String,List<String>>();
+		availablePaths=new ArrayList<Path>();
 	}
-	public void addPath(String cityFrom, String cityTo){
-		List<String> allDestinations=new ArrayList<String>();
-		allDestinations.add(cityTo);
-		flightsMap.put(cityFrom,allDestinations);
+	public void addPath(String from, String to){
+		availablePaths.add(new Path(from,to));
 	}
-	public String hasPath(String cityFrom, String cityTo){
-		boolean availability=flightsMap.containsKey(cityFrom);
-		return availability? "true" : "false";
+	public Path getPath(int index){
+		return availablePaths.get(index);
+	}
+	public String hasPath(String from, String to){
+		Boolean availability=availablePaths.contains(new Path(from,to));
+		return availability.toString();
 	}
 	public static void main(String[] args) {
 		Paths paths=new Paths();
