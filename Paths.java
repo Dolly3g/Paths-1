@@ -25,6 +25,11 @@ class Paths {
 	public boolean hasPath(String from, String to){
 		return availablePaths.contains(new Path(from,to));
 	}
+	public Result search(String from, String to){
+		Result result=new Result();
+		result.isAvailable=hasPath(from,to);
+		return result;
+	}
 	public static void main(String[] args) {
 		Paths paths=new Paths();
 		paths.addPath("Bangalore","Singapore");
@@ -35,4 +40,7 @@ class Paths {
 		Boolean availability=paths.hasPath(args[0],args[1]);
 		System.out.println(availability.toString());
 	}
+}
+class Result {
+	public boolean isAvailable;
 }

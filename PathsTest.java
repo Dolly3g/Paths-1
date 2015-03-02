@@ -53,4 +53,12 @@ public class PathsTest {
 		paths.addCity("Bangalore");
 		assertEquals(true,paths.hasCity("Bangalore"));
 	}
+	@Test
+	public void search_returns_a_result_with_availability_true_for_existing_path(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		Result searchResult=paths.search("Bangalore","Seoul");
+		assertNotNull(searchResult);
+		assertEquals(true,searchResult.isAvailable);
+	}
 }
