@@ -1,10 +1,20 @@
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.ArrayList;
 
 class Paths {
 	public List<Path> availablePaths;
+	public Set<String> cities;
 	public Paths(){
 		availablePaths=new ArrayList<Path>();
+		cities=new HashSet<String>();
+	}
+	public void addCity(String city){
+		cities.add(city);
+	}
+	public boolean hasCity(String city){
+		return cities.contains(city);
 	}
 	public void addPath(String from, String to){
 		availablePaths.add(new Path(from,to));

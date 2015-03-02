@@ -35,4 +35,22 @@ public class PathsTest {
 		paths.addPath("Seoul","Singapore");
 		assertEquals(false,paths.hasPath("Bangalore","Singapore"));
 	}
+	@Test
+	public void hasCity_gives_true_when_the_given_city_exists(){
+		setUp();
+		paths.addCity("Bangalore");
+		assertEquals(true,paths.hasCity("Bangalore"));
+	}
+	@Test
+	public void hasCity_gives_false_when_the_given_city_does_not_exists(){
+		setUp();
+		paths.addCity("Bangalore");
+		assertEquals(false,paths.hasCity("Seoul"));
+	}
+	@Test
+	public void addCity_adds_the_given_city_to_the_database(){
+		setUp();
+		paths.addCity("Bangalore");
+		assertEquals(true,paths.hasCity("Bangalore"));
+	}
 }
