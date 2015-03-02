@@ -18,6 +18,8 @@ class Paths {
 	}
 	public void addPath(String from, String to){
 		availablePaths.add(new Path(from,to));
+		cities.add(from);
+		cities.add(to);
 	}
 	public Path getPath(int index){
 		return availablePaths.get(index);
@@ -27,7 +29,9 @@ class Paths {
 	}
 	public Result search(String from, String to){
 		Result result=new Result();
-		if(!hasCity(to))
+		if(!hasCity(from))
+			result.notFound=from;
+		else if(!hasCity(to))
 			result.notFound=to;
 		result.isAvailable=hasPath(from,to);
 		return result;

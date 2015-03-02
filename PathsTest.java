@@ -77,4 +77,19 @@ public class PathsTest {
 		assertNotNull(searchResult);
 		assertEquals("Chennai",searchResult.notFound);
 	}
+	@Test
+	public void search_stores_bangalore_in_notFound_when_it_is_not_found_in_the_database(){
+		setUp();
+		paths.addPath("Chennai","Seoul");
+		Result searchResult=paths.search("Bangalore","Chennai");
+		assertNotNull(searchResult);
+		assertEquals("Bangalore",searchResult.notFound);
+	}
+	@Test
+	public void addPath_adds_the_given_cities_to_the_database(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		assertEquals(true,paths.hasCity("Bangalore"));
+		assertEquals(true,paths.hasCity("Seoul"));
+	}
 }
