@@ -70,7 +70,7 @@ public class PathsTest {
 		assertEquals(false,searchResult.isAvailable);
 	}
 	@Test
-	public void search_returns_a_result_with_TO_CITY_as_notFound_for_a_non_existing_TO_CITY(){
+	public void search_stores_CITY_TO_in_notFound_when_it_is_not_found_in_the_database(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
 		Result searchResult=paths.search("Bangalore","Chennai");
@@ -78,7 +78,7 @@ public class PathsTest {
 		assertEquals("Chennai",searchResult.notFound);
 	}
 	@Test
-	public void search_stores_bangalore_in_notFound_when_it_is_not_found_in_the_database(){
+	public void search_stores_CITY_FROM_in_notFound_when_it_is_not_found_in_the_database(){
 		setUp();
 		paths.addPath("Chennai","Seoul");
 		Result searchResult=paths.search("Bangalore","Chennai");
