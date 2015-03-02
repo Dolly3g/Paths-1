@@ -25,8 +25,10 @@ class Paths {
 		return availablePaths.get(index);
 	}
 	public boolean hasPath(String from, String to){
-		return availablePaths.contains(new Path(from,to)) || 
-				availablePaths.contains(new Path(to,from));
+		return availablePaths.contains(new Path(from,to));
+	}
+	public boolean hasAnyPath(String from, String to){
+		return hasPath(from,to) || hasPath(to,from);
 	}
 	public Result search(String from, String to){
 		Result result=new Result();
@@ -48,10 +50,16 @@ class Paths {
 class Result {
 	public boolean isAvailable;
 	public String notFound;
+	public String[] entirePath;
 	@Override
 	public String toString(){
 		if(notFound!=null) return "No city named \""+notFound+"\" in database";
-		if(isAvailable) return "true";
+		if(isAvailable){
+			String output="";
+			for (String p: entirePath)
+				output+=p;
+			return output;
+		}
 		else return "false";
 	}
 }

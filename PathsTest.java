@@ -36,11 +36,18 @@ public class PathsTest {
 		assertEquals(false,paths.hasPath("Bangalore","Singapore"));
 	}
 	@Test
-	public void hasPath_gives_true_when_the_path_is_available_UP_or_DOWN(){
+	public void hasPath_gives_true_when_the_path_is_available_UP(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
 		assertEquals(true,paths.hasPath("Bangalore","Seoul"));
-		assertEquals(true,paths.hasPath("Seoul","Bangalore"));
+		assertEquals(false,paths.hasPath("Seoul","Bangalore"));
+	}
+	@Test
+	public void hasAnyPath_gives_true_when_the_path_is_available_UP_or_DOWN(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		assertEquals(true,paths.hasAnyPath("Bangalore","Seoul"));
+		assertEquals(true,paths.hasAnyPath("Seoul","Bangalore"));
 	}
 	@Test
 	public void hasCity_gives_true_when_the_given_city_exists(){
@@ -108,19 +115,28 @@ public class PathsTest {
 		assertEquals(true,paths.hasCity("Seoul"));
 	}
 	@Test
-	public void result_toString_gives_the_message_true_when_the_path_is_found(){
+	public void result_entirePath_contains_the_cities_on_the_path_found_2_cities(){
 		setUp();
 		paths.addPath("Bangalore","Seoul");
 		Result searchResult=paths.search("Bangalore","Seoul");
-		assertEquals("true",searchResult.toString());
+		assertEquals("[Bangalore, Seoul]",searchResult.entirePath);
 	}
 	@Test
-	public void result_toString_gives_the_message_false_when_the_path_is_not_found(){
+	public void result_entirePath_contains_the_cities_on_the_path_found_3_cities(){
 		setUp();
-		paths.addPath("Bangalore","Seoul");
+		paths.addPath("Seoul","Bangalore");
 		paths.addPath("Singapore","Seoul");
 		Result searchResult=paths.search("Singapore","Bangalore");
-		assertEquals("false",searchResult.toString());
+		assertEquals("[Singapore, Seoul, Bangalore]",searchResult.entirePath);
+	}
+	@Test
+	public void result_entirePath_contains_the_cities_on_the_path_found_4_cities(){
+		setUp();
+		paths.addPath("Bangalore","SriLanka");
+		paths.addPath("SriLanka","Seoul");
+		paths.addPath("Seoul","Singapore");
+		Result searchResult=paths.search("Bangalore","Singapore");
+		assertEquals("[Bangalore, SriLanka, Seoul, Singapore]",searchResult.entirePath);
 	}
 	@Test
 	public void result_toString_gives_the_message_not_found_in_db_when_the_city_is_not_found_in_db(){
