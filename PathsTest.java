@@ -69,4 +69,12 @@ public class PathsTest {
 		assertNotNull(searchResult);
 		assertEquals(false,searchResult.isAvailable);
 	}
+	@Test
+	public void search_returns_a_result_with_TO_CITY_as_notFound_for_a_non_existing_TO_CITY(){
+		setUp();
+		paths.addPath("Bangalore","Seoul");
+		Result searchResult=paths.search("Bangalore","Chennai");
+		assertNotNull(searchResult);
+		assertEquals("Chennai",searchResult.notFound);
+	}
 }

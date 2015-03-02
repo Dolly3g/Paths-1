@@ -27,6 +27,8 @@ class Paths {
 	}
 	public Result search(String from, String to){
 		Result result=new Result();
+		if(!hasCity(to))
+			result.notFound=to;
 		result.isAvailable=hasPath(from,to);
 		return result;
 	}
@@ -43,4 +45,5 @@ class Paths {
 }
 class Result {
 	public boolean isAvailable;
+	public String notFound;
 }
