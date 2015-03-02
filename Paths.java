@@ -63,12 +63,7 @@ class Result {
 	@Override
 	public String toString(){
 		if(notFound!=null) return "No city named \""+notFound+"\" in database";
-		if(isAvailable){
-			String output="";
-			for (String p: entirePath)
-				output+=p;
-			return output;
-		}
+		if(isAvailable) return "true";
 		else return "false";
 	}
 }
