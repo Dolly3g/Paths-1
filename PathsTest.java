@@ -150,4 +150,12 @@ public class PathsTest {
 		Result searchResult=paths.search("Chennai","Lucknow");
 		assertEquals(true,searchResult.isAvailable);
 	}
+	@Test
+	public void result_s_path_is_empty_list_when_there_is_no_link_between_to_given_cities(){
+		setUp();
+		paths.addPath("Chennai","Bangalore");
+		paths.addPath("Seoul","SriLanka");
+		Result searchResult=paths.search("Chennai","Seoul");
+		assertEquals(0,searchResult.entirePath.size());
+	}
 }

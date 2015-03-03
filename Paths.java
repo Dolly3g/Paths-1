@@ -46,13 +46,8 @@ class Paths {
 	}
 	public List<String> findPath(String source, String destination){
 		List<String> path=new ArrayList<String>();
-		if(!pathsMap.containsKey(source)) return path;//false;
-		Set<String> middleCities=pathsMap.get(source);
-		if(middleCities.contains(destination)) return path;//true;
-		for (String middleCity: middleCities) {
-			if(hasPath(middleCity,destination)) return path;//true;
-		}
-		return path;//false;
+		if(!hasPath(source,destination)) return path;
+		return path;
 	}
 	public static void main(String[] args) {
 		Paths paths=new Paths();
