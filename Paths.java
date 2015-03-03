@@ -1,6 +1,8 @@
 import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
 class Paths {
@@ -42,8 +44,15 @@ class Paths {
 		result.entirePath=findPath(source,destination);
 		return result;
 	}
-	public String[] findPath(String source, String destination){
-		return null;
+	public List<String> findPath(String source, String destination){
+		List<String> path=new ArrayList<String>();
+		if(!pathsMap.containsKey(source)) return path;//false;
+		Set<String> middleCities=pathsMap.get(source);
+		if(middleCities.contains(destination)) return path;//true;
+		for (String middleCity: middleCities) {
+			if(hasPath(middleCity,destination)) return path;//true;
+		}
+		return path;//false;
 	}
 	public static void main(String[] args) {
 		Paths paths=new Paths();
@@ -59,7 +68,7 @@ class Paths {
 class Result {
 	public boolean isAvailable;
 	public String notFound;
-	public String[] entirePath;
+	public List<String> entirePath;
 	@Override
 	public String toString(){
 		if(notFound!=null) return "No city named \""+notFound+"\" in database";
